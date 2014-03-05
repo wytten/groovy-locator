@@ -12,6 +12,7 @@
         <slf4j.version>1.6.4</slf4j.version>
 		<groovy.version>2.1.6</groovy.version>
         <gmaven.version>1.4</gmaven.version>
+        <junit.version>4.11</junit.version>
 	</properties>
 
 	<dependencies>
@@ -29,6 +30,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
+        </dependency>   
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+			<version>${junit.version}</version>
         </dependency>   
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -87,7 +93,7 @@
                             <Implementation-Version>${project.version}</Implementation-Version>
                         </manifestEntries>
 						<manifest>
-							<mainClass>org.wyttenbach.dale.groovy.GroovyScriptLocator</mainClass>
+							<mainClass>org.wyttenbach.dale.groovy.GroovySystemTest</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

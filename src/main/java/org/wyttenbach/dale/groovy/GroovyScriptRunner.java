@@ -29,7 +29,7 @@ public class GroovyScriptRunner {
   }
 
   public static void main(String args[]) {
-    new GroovyScriptRunner(GroovyScriptLocator.class).run();
+    new GroovyScriptRunner(GroovySystemTest.class).run();
   }
   
   public void run() {
