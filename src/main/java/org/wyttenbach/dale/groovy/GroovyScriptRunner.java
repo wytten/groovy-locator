@@ -1,5 +1,6 @@
 package org.wyttenbach.dale.groovy;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
@@ -28,18 +29,22 @@ public class GroovyScriptRunner {
     this.args = args;
   }
 
-  public static void main(String args[]) {
+  public static void main(String args[]) throws Throwable {
     new GroovyScriptRunner(GroovySystemTest.class).run();
   }
-  
-  public void run() {
+
+  /**
+   * Invokes the class's main method, rethrowing whatever it throws so that
+   * callers (e.g. JUnit) see the script's own failure.
+   */
+  public void run() throws Throwable {
+    Method method = clazz.getMethod("main", String[].class);
+    LOG.debug("method="+method);
     try {
-      Method method = clazz.getMethod("main", String[].class);
-      LOG.debug("method="+method);
-      Object retval = method.invoke(null, (Object) args); 
+      Object retval = method.invoke(null, (Object) args);
       LOG.debug("retval="+retval);
-    } catch (Exception e) {
-      LOG.error(e.getLocalizedMessage(), e);
+    } catch (InvocationTargetException e) {
+      throw e.getCause();
     }
   }
 }

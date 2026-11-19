@@ -33,7 +33,7 @@ public class GroovySystemTest {
   }
 
   @Test
-  public void test() throws Exception {
+  public void test() throws Throwable {
     new GroovyScriptRunner(cls, args).run();
   }
 
