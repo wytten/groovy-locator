@@ -12,3 +12,20 @@ following line near the bottom of pom.xml:
 <phase>verify</phase>
 `
 
+Scripts live in `src/main/groovy/org/wyttenbach/dale/groovy`. Each one is run
+as a JUnit test, so a script that throws an exception is reported as a failure
+and fails the build.
+
+Tests
+-----
+
+`GroovyScriptRunnerTest` (under `src/test/java`) runs in the maven test phase,
+before the jar is built. It checks that:
+
+- a script that throws is reported as a failure, not just logged
+- the Groovy scripts are found on the classpath
+- every script runs without error
+
+Because of the last check, a broken script fails the build at the test phase.
+To skip the tests, build with `mvn install -DskipTests`.
+
